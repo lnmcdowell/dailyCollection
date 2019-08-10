@@ -19,7 +19,9 @@ struct DataNode {
 class CollectionViewController: UICollectionViewController {
     let CELL_ID = "CELL_ID"
     var data:[DataNode]? = [DataNode]()
+ 
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Daily CollectionView"
@@ -37,11 +39,13 @@ class CollectionViewController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.register(myCell.self, forCellWithReuseIdentifier: CELL_ID)
         prepareData()
-        //UICollectionViewFlowLayout()
-        //self.collectionViewLayout
-        self.collectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+
         // Do any additional setup after loading the view.
+         
     }
+    
+ 
+    
     func prepareData(){
         
         data?.append(DataNode(name: "Nate", age: 42, title: "Coder"))

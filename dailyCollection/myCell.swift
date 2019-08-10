@@ -9,6 +9,9 @@
 import UIKit
 
 class myCell: UICollectionViewCell {
+       var gameTimer: Timer?
+    var counter:Int = 0
+    
     var data:DataNode? {
         didSet{
             nameLabel.text = data!.name
@@ -27,15 +30,23 @@ class myCell: UICollectionViewCell {
             contentView.addSubview(nameLabel)
             contentView.addSubview(ageLabel)
             contentView.addSubview(titleLabel)
+            contentView.backgroundColor = UIColor(red:0.94, green:0.87, blue:0.80, alpha:1.0)
+           
             //contentView.translatesAutoresizingMaskIntoConstraints = false //don't do this
             nameLabel.doConstraints(top: contentView.topAnchor, left: contentView.leadingAnchor, bottom: ageLabel.topAnchor, right: contentView.trailingAnchor, padTop: 10, padLeft: 10, padBottom: -10, padRight: -10, width: 0, height: 0)
             ageLabel.doConstraints(top: nameLabel.bottomAnchor, left: contentView.leadingAnchor, bottom: contentView.bottomAnchor, right: titleLabel.leadingAnchor, padTop: 10, padLeft: 10, padBottom: -10, padRight: -10, width: 0, height: 0)
             titleLabel.doConstraints(top: nameLabel.bottomAnchor, left: ageLabel.trailingAnchor, bottom: contentView.bottomAnchor, right: contentView.trailingAnchor, padTop: 10, padLeft: 10, padBottom: -10, padRight: -10, width: 0, height: 0)
-            
+             gameTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         
         }
     
-    
+    @objc func runTimedCode(){
+        //print("ran")
+        if (data!.name == "Nate"){
+        ageLabel.text = "\(data!.age)"
+        data!.age += 1
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
